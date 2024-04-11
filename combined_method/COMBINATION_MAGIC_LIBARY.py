@@ -32,9 +32,9 @@ signature = ec_private_key.sign(
     ec.ECDSA(utils.Prehashed(hashes.SHA256()))
 )
 
-print("This signature yo -> ", signature)
+print("This is the digital signature -> ", signature)
 
-# Combine digital signature and message into a single byte string
+# Combine digital signature and message into a string
 data_to_encrypt = signature + message
 
 # Encrypt the combined data using RSA
@@ -60,15 +60,12 @@ decrypted_combined_data = rsa_private_key.decrypt(
         label=None
     )
 )
-print ("This is combined Plaintext -> ", decrypted_combined_data)
-# Separate the digital signature and message
+# seperating the signature and ciphertext
 signature_len = len(signature)
 decrypted_signature = decrypted_combined_data[:signature_len]
 decrypted_message = decrypted_combined_data[signature_len:]
 
-
-print ("This is decrypted signature -> ", decrypted_signature)
-# Verify the signature
+# Verifying the signature
 counter = 0
 try:
     ec_public_key.verify(
@@ -80,6 +77,8 @@ try:
     counter = 1
 except:
     counter = 2
+
+# if signature is found invalid, we wont decypher the ciphertext
 
 if counter == 2:
     print("Signature is invalid.")
