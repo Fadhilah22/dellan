@@ -55,6 +55,8 @@ cipher_combined_data = rsa_public_key.encrypt(
 end_sign_n_enc = time.time()
 sign_enc = (end_sign_n_enc - start_sign_n_enc) * 1000
 
+start_dec_verify = time.time()
+
 # Decrypt the combined data using RSA
 decrypted_combined_data = rsa_private_key.decrypt(
     cipher_combined_data,
@@ -82,7 +84,15 @@ try:
 except:
     counter = 2
 
+end_dec_verify = time.time()
+
+dec_verify_time = (end_dec_verify - start_dec_verify) * 1000
+
 # if signature is found invalid, we wont decypher the ciphertext
+
+print("Key generation runtime -> ", keypair_time ,"ms")
+print("Signing and encrpyting runtime -> ", sing_enc ,"ms")
+print("Decrpyt and verify runtime -> ", dec_verify_time ,"ms")
 
 if counter == 2:
     print("Signature is invalid.")
