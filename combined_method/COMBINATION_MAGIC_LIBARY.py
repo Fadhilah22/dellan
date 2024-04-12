@@ -17,7 +17,7 @@ rsa_public_key = rsa_private_key.public_key()
 
 # Generate ECDSA key pair
 ec_private_key = ec.generate_private_key(
-    ec.SEC384R1()
+    ec.SECP384R1()
 )
 ec_public_key = ec_private_key.public_key()
 
@@ -91,7 +91,7 @@ dec_verify_time = (end_dec_verify - start_dec_verify) * 1000
 # if signature is found invalid, we wont decypher the ciphertext
 
 print("Key generation runtime -> ", keypair_time ,"ms")
-print("Signing and encrpyting runtime -> ", sing_enc ,"ms")
+print("Signing and encrpyting runtime -> ", sign_enc ,"ms")
 print("Decrpyt and verify runtime -> ", dec_verify_time ,"ms")
 
 if counter == 2:
